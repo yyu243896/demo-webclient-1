@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.example.demo;
 
 import java.security.SecureRandom;
 
@@ -10,5 +10,11 @@ public class MathTest {
 
 
         System.out.println("bytes.toString() = " + sr.nextLong());
+
+        HelloWorld helloWorld = new HelloWorld();
+        helloWorld.print();
+
+        InterfaceImp face = new InterfaceImp();
+        System.out.println("face.absMethod() = " + face.absMethod());
     }
 }
