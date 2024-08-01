@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.BoardVo;
 import com.example.demo.service.CommentVo;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ public class HelloController {
 
 
     @GetMapping("/hello")
-    public List<BoardVo> hello() {
+    public List<BoardVo> hello(HttpServletRequest request) {
         return boardService.getList();
     }
 

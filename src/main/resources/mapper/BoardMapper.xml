@@ -9,7 +9,8 @@
     </select>
     <select id="getComments" resultType="com.example.demo.service.CommentVo">
         SELECT BRD_ID, ID, CMT
-        FROM TB_BRD_CMT
-        WHERE BRD_ID = #{brdId}
+          FROM TB_BRD_CMT
+         WHERE BRD_ID = #{brdId}
+         ORDER BY BRD_ID, ORD
     </select>
 </mapper>
