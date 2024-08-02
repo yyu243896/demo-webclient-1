@@ -19,11 +19,35 @@ class InterfaceImp() : MyInterface {
 data class UserDetail(var name: String, var id: Int, var email: String)
 
 
-fun main(args: Array<String>) {
-    val u = UserDetail("Ashu", 101, "mydream77@mail.com")
-    println(u)
-    val obj = InterfaceImp()
-    println("Calling overriding id value = ${obj.id}")
-    obj.doSomthing()
-    println(obj.absMethod())
+fun addNumber(a:Int, b:Int, mylambda:(Int) -> Unit) {
+    val sum = a + b
+    mylambda(sum)
+}
+
+fun main(args: Array<String>)
+{
+    val mylambda: (Int) -> Unit = {s:Int -> println(s)}
+    addNumber(5,10, mylambda)
+
+
+//    Stringar number = 44
+//    var numberProvided = when(number) {
+//        1->"One"
+//        2->"Two"
+//        3->"Three"
+//        4->"Four"
+//        5->"Five"
+//        else -> "invalid number"
+//    }
+//
+//    println("You provide $numberProvided")
+//
+//
+//
+//    val u = UserDetail("Ashu", 101, "mydream77@mail.com")
+//    println(u)
+//    val obj = InterfaceImp()
+//    println("Calling overriding id value = ${obj.id}")
+//    obj.doSomthing()
+//    println(obj.absMethod())
 }
