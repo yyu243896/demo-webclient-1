@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <tile>Untitled Document</tile>
+</head>
+<body>
+
+<h2>Hello world</h2>
+
+<table>
+    <tr>
+        <td>title</td>
+    </tr>
+    <tbody>
+    <tr th:each="h : ${hello}">
+        <td th:text="${h.ttl}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
