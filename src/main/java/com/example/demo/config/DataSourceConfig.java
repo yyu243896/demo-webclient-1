@@ -25,7 +25,7 @@ public class DataSourceConfig {
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
-        sqlSessionFactory.setTypeAliasesPackage("com.example.demo");
+        sqlSessionFactory.setTypeAliasesPackage("com.example.demo.service");
         sqlSessionFactory.setMapperLocations(
                 new PathMatchingResourcePatternResolver().getResource("mapper/BoardMapper.xml")
         );

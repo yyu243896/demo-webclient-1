@@ -2,7 +2,6 @@ package com.example.demo.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -12,7 +11,7 @@ import java.util.Enumeration;
 import java.util.UUID;
 
 
-@Slf4j
+//@Slf4j
 public class XSSInterceptor implements HandlerInterceptor {
 
     private final static Logger log = LoggerFactory.getLogger(XSSInterceptor.class);

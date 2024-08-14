@@ -1,12 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.CustomerRepository;
 import com.example.demo.service.BoardService;
 import com.example.demo.service.CommentVo;
-
 import jakarta.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +21,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public ModelAndView hello(HttpServletRequest request) {
-    	ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView();
         mv.addObject("hello", boardService.getList());
         mv.setViewName("hello");
         return mv;
