@@ -8,8 +8,8 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
-    List<BoardVo> getList();
+	List<BoardVo> getList();
 
-    List<CommentVo> getComments(long brdId);
+	List<CommentVo> getComments(long brdId);
 
 }
