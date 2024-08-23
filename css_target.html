@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+ .aside {
+   border: solid 1px red;
+   height:100%;
+   width: 0%;
+   position: fixed;
+   z-index: 1;
+   top:0;
+   left:0;
+   overflow-x: hidden ;
+   padding-top:60px;
+   transition: 0.5s;
+   background-color: #cfcfcf;
+ }
+
+#menu:target {
+  width: 20%;
+}
+
+#toggle:target {
+  width: 0;
+}
+</style>
+<body>
+  
+
+  <input type="button" name="btn-menu" value="왼족메뉴" onclick="location.href='#menu'"/>
+  <h1>hello django</h1>
+
+  <div class="aside" id="menu">
+    <a href="#">닫기</a>
+    <ul>
+      <li><a href="">김치냉장고</a></li>
+      <li><a href="">홍길동</a></li>
+      <li><a href="">강감찬</a></li>
+      <li><a href="">이순신</a></li>
+      <li><a href="">맥아더</a></li>
+      <li><a href="">최생색</a></li>
+    </ul>
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+  <script>
+    $(document).ready(function () {
+
+    });
+
+  </script>
+</body>
+</html>
