@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">
+
+<body>
+
+    <input type="button" id="addTab" value="Add Tab" />
+    <div id="tabs">
+        <ul>
+            <li class="tab"><button class="btnx" data-tab-index="tab-1">x</button><a href="#tab-1">Section 1</a>
+
+            </li>
+            <li class="tab"><button class="btnx" data-tab-index="tab-2">x</button><a href="#tab-2">Section 2</a>
+
+            </li>
+            <li class="tab"><button class="btnx" data-tab-index="tab-3">x</button><a href="#tab-3">Section 3</a>
+
+            </li>
+        </ul>
+        <div id="tab-1">Section Title:
+            <input class="sectionTitle" />
+            <br />
+            <p>Paragraph text 1</p>
+        </div>
+        <div id="tab-2">Section Title:
+            <input class="sectionTitle" />
+            <br />
+            <p>Paragraph text 2</p>
+        </div>
+        <div id="tab-3">Section Title:
+            <input class="sectionTitle" />
+            <br />
+            <p>Paragraph text 3</p>
+        </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script>
+$(document).ready(function () {
+    console.log('debug')
+
+    $('#addTab').click(function () {
+        var num_tabs = $('div#tabs ul li.tab').length + 1;        
+        $('div#tabs ul').append(
+            '<li class="tab"><button class="btnx" data-tab-index="btn-' + num_tabs + '">x</button>' + 
+            '  <a href="#tab-' + num_tabs + '">Section ' + num_tabs + '</a>' + 
+            '</li>');
+
+        $('div#tabs').append(
+            '<div id="tab-' + num_tabs + '"></div>');
+        $('#tabs').tabs("refresh");
+        $('#tabs').tabs("option", "active", -1); //makes the new tab active
+
+        insertContent("asdf");
+    });
+
+    $(document).on('click', ".btnx", function () {
+
+        var index = event.target.dataset.tabIndex;
+
+        $(this).closest('li').remove();
+        $('#' + index).remove();
+        $('#tabs').tabs("refresh");
+
+
+    });
+
+});
+
+  //Insert content into the currently selected tab
+  function insertContent(content) {
+      var activeTab = $("#tabs").tabs('option', 'active');   
+      activeTab += 1;   
+      $("#tab-" + activeTab).append(content);
+  }
+  $('#tabs').tabs();
+        </script>
+</body>
+</html>
