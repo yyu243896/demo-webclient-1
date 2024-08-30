@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
+
+    <style> 
+
+    
+    </style>
+</head>
+<body>
+
+    <input type="button" name="prevMonth" id="prevMonth" value="<"/>
+
+    <select name="year" id="year">
+        <option value="2030">2030</option>
+        <option value="2029">2029</option>
+        <option value="2028">2028</option>
+        <option value="2027">2027</option>
+        <option value="2026">2026</option>
+        <option value="2025">2025</option>
+        <option value="2024" selected>2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+    </select>
+
+
+    <select name="month" id="month">
+        <option value="0"> 01</option>
+        <option value="1"> 02</option>
+        <option value="2"> 03</option>
+        <option value="3"> 04</option>
+        <option value="4"> 05</option>
+        <option value="5"> 06</option>
+        <option value="6"> 07</option>
+        <option value="7" selected> 08</option>
+        <option value="8"> 09</option>
+        <option value="9">10</option>
+        <option value="10">11</option>
+        <option value="11">12</option>
+    </select>
+    <input type="button" name="nextMonth" id="nextMonth" value=">"/>
+    <!--
+    <table border="2">
+        <tr>
+            <th>일</th>
+            <th>월</th>
+            <th>화</th>
+            <th>수</th>
+            <th>목</th>
+            <th>금</th>
+            <th>토</th>
+        </tr>
+    </table>
+-->
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+    
+$(document).ready(function () {
+    
+    $('#prevMonth').on('click', () => {
+        var prevMonth = parseInt($('#month').val());
+        var nextYear = parseInt($('#year').val());
+ 
+        if (prevMonth === 0) {
+            prevMonth = 11;
+            nextYear--;
+        } else {
+            prevMonth = prevMonth-1;
+        }
+        $('#year').val(nextYear);
+        $('#month').val(prevMonth); 
+        getCalendar( nextYear, parseInt(prevMonth) );
+    })
+
+    $('#nextMonth').on('click', () => {
+        var nextMonth = parseInt($('#month').val());
+        var nextYear = parseInt($('#year').val());
+        if (nextMonth === 11) {
+            nextMonth = 0;
+            nextYear++;
+        } else {
+            nextMonth = nextMonth+1;
+        }
+        $('#year').val(nextYear);
+        $('#month').val(nextMonth);
+
+        getCalendar( nextYear, parseInt(nextMonth) );
+    })
+
+
+
+    $('#year').on('change', () => {
+        const yy = $('#year').val();
+        const mm = $('#month').val();
+        getCalendar( yy, parseInt(mm) );
+    })
+
+    $('#month').on('change', () => {
+        const yy = $('#year').val();
+        const mm = $('#month').val();
+        getCalendar( yy, parseInt(mm) );
+    })
+
+    getCalendar(
+        $('#year').val(), 
+        $('#month').val()
+    );
+
+});
+
+
+function getCalendar(year, month ) {
+    
+    const today = new Date();
+    // const yy = today.getFullYear();
+    // const mm = today.getMonth();
+    const yy = parseInt(year);
+    const mm = parseInt(month);
+    const dd = today.getDate();
+
+    const firstday = new Date(yy, mm, 1);
+    const lastday = new Date(yy, mm+1, 0);
+    console.log("==================================");
+
+    console.log(`${yy}년 ${mm+1}월`);
+    // console.log("first date :: " + firstday.getDate());
+    // console.log("start day :: " + firstday.getDay());
+    // console.log("last date :: " + lastday.getDate());
+    // console.log("start day :: " + lastday.getDay());
+
+    let ee = '\n';
+        ee += '일\t 월\t화\t수\t목\t금\t토\n';
+
+    const st = firstday.getDay();
+    for (let index = 0; index < 7; index++) {
+        if (st > index) {
+            ee += '-\t';
+        } 
+    }
+    
+
+    for (let i = firstday.getDate() ; i <= lastday.getDate(); i++) {
+
+        const currentDate = new Date(yy, mm, i);
+
+        ee += (7-currentDate.getDay()) % 7  ? '' : ' (' + getDateWeek(currentDate) + ') \n'; 
+        ee += ` ${i}\t`;
+    }
+
+    console.log("============================================================"); 
+
+    const currentDate = new Date(yy, mm, lastday.getDate());
+    const end = currentDate.getDay();
+
+    for (let index = 0; index < 7; index++) {
+        if (end < index) {
+            ee += '-\t';
+        } 
+    }
+    ee += ' (' + getDateWeek(currentDate) + ') \n';
+
+    console.log(ee); 
+    return ee;
+}
+function getDateWeek(date) {
+    const currentDate = 
+        (typeof date === 'object') ? date : new Date();
+    const januaryFirst = 
+        new Date(currentDate.getFullYear(), 0, 1);
+    const daysToNextMonday = 
+        (januaryFirst.getDay() === 1) ? 0 : 
+        (7 - januaryFirst.getDay()) % 7;
+    const nextMonday = 
+        new Date(currentDate.getFullYear(), 0, 
+        januaryFirst.getDate() + daysToNextMonday);
+ 
+    return (currentDate < nextMonday) ? 52 : 
+    (currentDate > nextMonday ? Math.ceil(
+    (currentDate - nextMonday) / (24 * 3600 * 1000) / 7) : 1);
+}
+
+
+</script>
+</body>
+</html>
